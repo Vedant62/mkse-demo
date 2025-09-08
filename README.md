@@ -270,4 +270,4 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## Acknowledgments
 
-This implementation demonstrates searchable encryption techniques for educational purposes. The im. Consider consulting cryptography experts for production systems handling sensitive data.
+This implementation demonstrates searchable encryption techniques for educational purposes. Consider consulting cryptography experts for production systems handling sensitive data.
