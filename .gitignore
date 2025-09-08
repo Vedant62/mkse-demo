@@ -1,0 +1,35 @@
+# Byte-compiled / cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+env/
+venv/
+.venv/
+
+# Mac & editor stuff
+.DS_Store
+.idea/
+.vscode/
+
+# AWS local configs / credentials
+*.pem
+*.key
+*.crt
+*.der
+.aws/
+credentials
+config
+
+# Secret files
+*.env
+secrets.json
+*.db
+
+# Output
+results/
+build/
+dist/
+*.egg-info/
