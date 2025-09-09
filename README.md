@@ -37,7 +37,7 @@ The system uses a three-party model with cryptographic techniques to ensure priv
    - Executes search queries over obfuscated labels (trapdoors)
    - Never sees plaintext documents or plaintext queries
 
-4. **Client (Authorized User)**
+3. **Client (Authorized User)**
    - Submits plaintext keywords to `/trapdoor` Lambda for label conversion
    - Sends trapdoor labels to `/search` Lambda for DynamoDB queries
    - Fetches encrypted documents from S3 and decrypts locally using KMS
