@@ -31,12 +31,13 @@ The system uses a three-party model with cryptographic techniques to ensure priv
    - Encrypts documents with AES-GCM using per-document data keys from AWS KMS
    - Stores encrypted index (labels → postings) in DynamoDB
 
-2. **Cloud Server (Untrusted AWS)**
+2. **Cloud Server (Untrusted Cloud, here AWS)**
+   > not to be confused with the search service which is also using AWS 
    - Stores encrypted documents in S3 and encrypted index in DynamoDB
    - Executes search queries over obfuscated labels (trapdoors)
    - Never sees plaintext documents or plaintext queries
 
-3. **Client (Authorized User)**
+4. **Client (Authorized User)**
    - Submits plaintext keywords to `/trapdoor` Lambda for label conversion
    - Sends trapdoor labels to `/search` Lambda for DynamoDB queries
    - Fetches encrypted documents from S3 and decrypts locally using KMS
@@ -54,18 +55,15 @@ The system uses a three-party model with cryptographic techniques to ensure priv
 ```
 mkse-poc/
 ├── README.md
-├── LICENSE
 ├── requirements.txt
 ├── .gitignore
-├── mkse_poc.py                # Core MKSE utilities
 ├── owner_uploader.py          # Document upload and indexing
 ├── trapdoor_lambda.py         # Keyword → label conversion
 ├── search_lambda.py           # Search over encrypted index
 ├── client_retrieve.py         # Document retrieval and decryption
 ├── mkse-lambda-policy.json    # IAM policy template
 ├── trust-policy.json          # Lambda trust policy
-├── docs/                      # Sample documents for demo
-└── infra/                     # Infrastructure templates (optional)
+└── docs/                      # Sample docs for testing
 ```
 
 ## Quick Concepts
@@ -199,8 +197,10 @@ Deploy and note the Invoke URL.
    - `S3_BUCKET`, `DDB_TABLE`, `PRP_SECRET_ARN`
 
 2. Place sample `.txt` files in `./docs/`
+   
 
 3. Run the uploader:
+   > assuming the files to be uploaded are in `/docs`
 ```bash
 AWS_PROFILE=mkse-demo AWS_REGION=ap-southeast-1 python3 owner_uploader.py \
   --docs_dir ./docs --top_k 4 --n_virtual 2
@@ -220,6 +220,7 @@ curl -s -X POST "${API_BASE_URL}/trapdoor" \
   -H "Content-Type: application/json" \
   -d '{"keywords":["network"]}' | jq
 ```
+> replace `network` with your `<keywords>`
 
 2. **Search with labels**:
 ```bash
