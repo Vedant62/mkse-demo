@@ -272,3 +272,6 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 ## Acknowledgments
 
 This implementation demonstrates searchable encryption techniques for educational purposes. Consider consulting cryptography experts for production systems handling sensitive data.
+
+This implementation was inspired by the following paper: [Encrypted_Search_Method_for_Cloud_Computing_Data_U.pdf](https://github.com/user-attachments/files/22234922/Encrypted_Search_Method_for_Cloud_Computing_Data_U.pdf)
+
